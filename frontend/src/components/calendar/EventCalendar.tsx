@@ -5,19 +5,20 @@ import "./CalendarStyles.css";
 import { get } from "../../utils/api";
 
 type PomodoroHistoryItem = {
-  date: string; // expected format: "YYYY-MM-DD"
+  date: string;
   cycles: number;
 };
-
 
 function parseLocalDate(dateStr: string): Date {
   const [year, month, day] = dateStr.split("-").map(Number);
   return new Date(year, month - 1, day);
 }
 
-
 function formatDate(date: Date): string {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
+    2,
+    "0"
+  )}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
 export default function StreakCalendar() {
@@ -27,7 +28,7 @@ export default function StreakCalendar() {
   useEffect(() => {
     async function fetchHistory() {
       try {
-        const res = await get("/pomodoro/history"); 
+        const res = await get("/pomodoro/history");
         if (!res.ok) throw new Error("Failed to fetch history");
         const data: PomodoroHistoryItem[] = await res.json();
         setHistory(data);
@@ -57,10 +58,9 @@ export default function StreakCalendar() {
       const isStreakDate = cyclesByDate.hasOwnProperty(dateStr);
       const isToday = new Date().toDateString() === date.toDateString();
 
-      return [
-        isStreakDate ? "streak-date" : "",
-        isToday ? "today" : "",
-      ].join(" ");
+      return [isStreakDate ? "streak-date" : "", isToday ? "today" : ""].join(
+        " "
+      );
     }
     return null;
   };
