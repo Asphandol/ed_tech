@@ -3,6 +3,7 @@
 
 import Sidebar from "@/components/Sidebar";
 import Image from "next/image";
+import { useAuth } from '../../contexts/authContext'
 
 const shopItems = [
   {
@@ -38,12 +39,14 @@ const shopItems = [
 ];
 
 const Shop = () => {
+  const { user, isLoading } = useAuth();
   return (
     <main className="flex-1 px-8 pt-10">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold text-zinc-800">Shop</h1>
         <div className="flex items-center gap-2 font-semibold text-yellow-500">
-          <span>1000</span>
+          User credits: 
+          <span>{user?.credits || 0}</span>
           <Image src="/shop/coin.png" alt="coins" width={20} height={20} />
         </div>
       </div>

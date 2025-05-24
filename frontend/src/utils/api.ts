@@ -29,7 +29,7 @@ export const apiRequest = async (
       };
     }
   }
-
+  
   const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
 
   if (response.status === 401 && requireAuth) {
