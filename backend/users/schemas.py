@@ -13,6 +13,7 @@ class UserOut(BaseModel):
     id: UUID4
     username: str
     email: EmailStr
+    credits: int
     
 
     class Config:

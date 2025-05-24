@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import MantineWrapper from '@/components/MantineWrapper'
+import ProtectedRoute from '@/components/ProtectedRoute'
+import { AuthProvider } from '@/contexts/authContext'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,7 +29,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <MantineWrapper>{children}</MantineWrapper>
+        <AuthProvider>
+          <MantineWrapper>
+            {children}
+          </MantineWrapper>
+        </AuthProvider>
       </body>
     </html>
   )
