@@ -1,48 +1,49 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { Play, Pause, RotateCcw } from 'lucide-react'
+import { useEffect, useState } from "react";
+import { Play, Pause, RotateCcw } from "lucide-react";
 
 export default function PomodoroTimer() {
-  const POMODORO_TIME = 25 * 60 // 25 minutes in seconds
-  const [secondsLeft, setSecondsLeft] = useState(POMODORO_TIME)
-  const [isRunning, setIsRunning] = useState(false)
-  const progress = ((POMODORO_TIME - secondsLeft) / POMODORO_TIME) * 100
+  const POMODORO_TIME = 25 * 60; // 25 minutes in seconds
+  const [secondsLeft, setSecondsLeft] = useState(POMODORO_TIME);
+  const [isRunning, setIsRunning] = useState(false);
+  const progress = ((POMODORO_TIME - secondsLeft) / POMODORO_TIME) * 100;
 
   const formatTime = (s: number) => {
-    const minutes = Math.floor(s / 60)
-    const secs = s % 60
-    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
-  }
+    const minutes = Math.floor(s / 60);
+    const secs = s % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(secs).padStart(
+      2,
+      "0"
+    )}`;
+  };
 
   const resetTimer = () => {
-    setIsRunning(false)
-    setSecondsLeft(POMODORO_TIME)
-  }
+    setIsRunning(false);
+    setSecondsLeft(POMODORO_TIME);
+  };
 
   const toggleTimer = () => {
-    setIsRunning(!isRunning)
-  }
+    setIsRunning(!isRunning);
+  };
 
   useEffect(() => {
-    let timer: NodeJS.Timeout | null = null
+    let timer: NodeJS.Timeout | null = null;
 
     if (isRunning && secondsLeft > 0) {
-      timer = setInterval(() => setSecondsLeft((s) => s - 1), 1000)
+      timer = setInterval(() => setSecondsLeft((s) => s - 1), 1000);
     } else if (secondsLeft === 0) {
-      setIsRunning(false)
-      // Play completion sound here if desired
+      setIsRunning(false);
     }
 
     return () => {
-      if (timer) clearInterval(timer)
-    }
-  }, [isRunning, secondsLeft])
+      if (timer) clearInterval(timer);
+    };
+  }, [isRunning, secondsLeft]);
 
   return (
-    <div className="flex flex-col items-center justify-center  bg-gradient-to-br from-gray-900 to-gray-800 p-4">
+    <div className="flex flex-col items-center justify-center bg-[#99b6c7] p-4 rounded me-2">
       <div className="relative w-full max-w-md">
-        {/* Progress ring */}
         <div className="relative w-64 h-64 mx-auto mb-8">
           <svg className="w-full h-full" viewBox="0 0 100 100">
             <circle
@@ -67,26 +68,24 @@ export default function PomodoroTimer() {
               className="transition-all duration-200 ease-out"
             />
           </svg>
-          
-          {/* Timer display */}
+
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className="text-5xl font-bold text-white mb-2">
               {formatTime(secondsLeft)}
             </span>
             <p className="text-gray-300 uppercase text-sm tracking-widest">
-              {isRunning ? 'Focus' : 'Paused'}
+              {isRunning ? "Focus" : "Paused"}
             </p>
           </div>
         </div>
 
-        {/* Controls */}
         <div className="flex justify-center space-x-6">
           <button
             onClick={toggleTimer}
             className={`p-4 rounded-full shadow-lg transition-all duration-200 ${
-              isRunning 
-                ? 'bg-white/10 hover:bg-white/20 text-white' 
-                : 'bg-red-500 hover:bg-red-600 text-white'
+              isRunning
+                ? "bg-white/10 hover:bg-white/20 text-white"
+                : "bg-red-500 hover:bg-red-600 text-white"
             }`}
           >
             {isRunning ? (
@@ -95,7 +94,7 @@ export default function PomodoroTimer() {
               <Play className="w-6 h-6" />
             )}
           </button>
-          
+
           <button
             onClick={resetTimer}
             className="p-4 rounded-full bg-white/5 hover:bg-white/10 text-white shadow-lg transition-all duration-200"
@@ -104,7 +103,6 @@ export default function PomodoroTimer() {
           </button>
         </div>
 
-        {/* Status message */}
         {secondsLeft === 0 && (
           <div className="mt-8 text-center">
             <p className="text-xl text-white font-medium animate-pulse">
@@ -117,5 +115,5 @@ export default function PomodoroTimer() {
         )}
       </div>
     </div>
-  )
+  );
 }

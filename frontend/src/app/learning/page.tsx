@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Sidebar from "@/components/Sidebar";
 import Progress from "@/components/Progress";
 import PomodoroTimer from "@/components/PomodoroTimer";
 import EventCalendar from "@/components/calendar/EventCalendar";
+
 import Image from "next/image";
 
 export default function Home() {
@@ -28,15 +28,21 @@ export default function Home() {
             <div className="w-1/2">
               <PomodoroTimer />
             </div>
-            <div className="w-1/2">
-              <div className="bg-white rounded-lg shadow p-6 h-full">
-                <p className="text-zinc-700 text-lg font-medium">
-                  Stay focused!
+            <div className="w-1/2 flex justify-center ">
+              <div className="bg-white rounded-lg shadow p-6 text-center w-full ">
+                <p className="text-zinc-700 text-lg font-semibold mb-4">
+                  Why did the developer go broke? Because he used up all his
+                  cache!
                 </p>
-                <p className="mt-2 text-sm text-zinc-500">
-                  Track your progress, review your goals, or relax with a break
-                  task here.
-                </p>
+                <div className="flex justify-center">
+                  <Image
+                    src="/characters/charact2.png"
+                    alt="Character"
+                    width={150}
+                    height={150}
+                    className="rounded-full"
+                  />
+                </div>
               </div>
             </div>
           </div>

@@ -40,13 +40,8 @@ export default function Sidebar() {
     <aside className="w-20 h-screen bg-[#001F2D] flex flex-col items-center py-6 justify-between text-white">
       <div>
         <Link href="/">
-          <div className="mb-8 cursor-pointer">
-            <Image
-              src="/images/logo.png"
-              alt="OLP Logo"
-              width={40}
-              height={40}
-            />
+          <div className="mb-8 cursor-pointer bg-white">
+            <Image src="/logo.png" alt="OLP Logo" width={40} height={40} />
           </div>
         </Link>
 
