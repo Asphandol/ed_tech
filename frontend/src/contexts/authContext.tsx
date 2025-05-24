@@ -1,6 +1,12 @@
-'use client';
+"use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 interface User {
   email: string;
@@ -20,7 +26,11 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<boolean>;
-  register: (email: string, password: string, additionalData?: RegistrationData) => Promise<boolean>;
+  register: (
+    email: string,
+    password: string,
+    additionalData?: RegistrationData
+  ) => Promise<boolean>;
   logout: () => void;
   isLoading: boolean;
 }
@@ -36,11 +46,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+  const API_BASE_URL =
+    process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
   useEffect(() => {
     // Check for existing token on app load
-    const savedToken = localStorage.getItem('access_token');
+    const savedToken = localStorage.getItem("access_token");
     if (savedToken) {
       setToken(savedToken);
       // Optionally verify token and get user info
@@ -54,8 +65,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await fetch(`${API_BASE_URL}/me`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       });
 
@@ -63,13 +74,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const userData = await response.json();
         setUser(userData);
       } else {
-        // Token is invalid, remove it
-        localStorage.removeItem('access_token');
+        localStorage.removeItem("access_token");
         setToken(null);
       }
     } catch (error) {
-      console.error('Token verification failed:', error);
-      localStorage.removeItem('access_token');
+      console.error("Token verification failed:", error);
+      localStorage.removeItem("access_token");
       setToken(null);
     } finally {
       setIsLoading(false);
@@ -79,9 +89,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       const response = await fetch(`${API_BASE_URL}/login`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
@@ -89,46 +99,48 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         const { access_token } = data;
-        
+
         setToken(access_token);
-        localStorage.setItem('access_token', access_token);
-        
-        // Get user info after successful login
+        localStorage.setItem("access_token", access_token);
+
         await verifyToken(access_token);
         return true;
       } else {
         const errorData = await response.json();
-        console.error('Login failed:', errorData);
+        console.error("Login failed:", errorData);
         return false;
       }
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       return false;
     }
   };
 
-  const register = async (email: string, password: string, additionalData?: RegistrationData): Promise<boolean> => {
+  const register = async (
+    email: string,
+    password: string,
+    additionalData?: RegistrationData
+  ): Promise<boolean> => {
     try {
       const payload = additionalData || { email, password };
-      
+
       const response = await fetch(`${API_BASE_URL}/register`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
       });
 
       if (response.ok) {
-        // After successful registration, automatically log in
         return await login(email, password);
       } else {
         const errorData = await response.json();
-        console.error('Registration failed:', errorData);
+        console.error("Registration failed:", errorData);
         return false;
       }
     } catch (error) {
-      console.error('Registration error:', error);
+      console.error("Registration error:", error);
       return false;
     }
   };
@@ -136,7 +148,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logout = () => {
     setUser(null);
     setToken(null);
-    localStorage.removeItem('access_token');
+    localStorage.removeItem("access_token");
   };
 
   const value: AuthContextType = {
@@ -148,17 +160,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isLoading,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

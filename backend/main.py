@@ -33,9 +33,6 @@ app.include_router(pomodoro_router)
 app.include_router(questions_router)
 
 
-
-
-
 @app.get('/')
 def health_checker():
     return JSONResponse(status_code=200, content={"message":"success"})
