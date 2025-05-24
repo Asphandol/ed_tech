@@ -1,5 +1,4 @@
 .calendar-container {
-  /* max-width: 400px; */
   margin: 0 auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: white;
@@ -23,8 +22,8 @@
 }
 
 .streak-counter {
-  background: #fee2e2; /* red-100 */
-  color: #dc2626; /* red-600 */
+  background: #fee2e2;
+  color: #dc2626;
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -62,7 +61,7 @@
 }
 
 .streak-date {
-  background: #dc2626 !important; /* red-600 */
+  background: #dc2626 !important;
   color: white !important;
   font-weight: 600;
 }
