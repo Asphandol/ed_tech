@@ -103,15 +103,8 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left Sidebar */}
-      <div className="w-32 bg-slate-800 flex flex-col items-center py-6">
-        <div className="text-white text-xl font-bold mb-8">MOLP</div>
-        <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
-          <span className="text-white text-xl">👁</span>
-        </div>
-      </div>
-
+    <>
+      
       {/* Main Content */}
       <div className="flex-1 bg-gray-50 flex items-center justify-center p-8">
         <div className="max-w-2xl w-full">
@@ -264,7 +257,7 @@ const RegisterPage: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

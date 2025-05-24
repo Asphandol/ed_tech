@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import MantineWrapper from "@/components/MantineWrapper";
 import Sidebar from "@/components/Sidebar";
+import { AuthProvider } from "@/contexts/authContext";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -28,12 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="antialiased bg-gray-50 text-gray-900 min-h-screen">
-        <MantineWrapper>
-          <div className="flex min-h-screen">
-            <Sidebar />
-            {children}
-          </div>
-        </MantineWrapper>
+        <AuthProvider>
+          <MantineWrapper>
+            <div className="flex min-h-screen">
+              <Sidebar />
+              {children}
+            </div>
+          </MantineWrapper>
+        </AuthProvider>
       </body>
     </html>
   );

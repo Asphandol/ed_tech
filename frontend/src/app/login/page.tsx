@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
     try {
       const success = await login(email, password);
       if (success) {
-        router.push('/'); // Redirect to dashboard or home page
+        router.push('/');
       } else {
         setError('Invalid email or password');
       }
@@ -34,13 +34,13 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
-          </h2>
-        </div>
+    <div className="flex-col w-full bg-gray-50 flex items-center justify-center">
+       <div className="max-w-2xl w-full">
+          <div className="text mb-8">
+              <h1 className="text-3xl font-bold text-center text-gray-900 mb-12">
+              Sign Up
+              </h1>
+          </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
             <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
@@ -102,7 +102,7 @@ const LoginPage: React.FC = () => {
             </span>
           </div>
         </form>
-      </div>
+        </div>
     </div>
   );
 };
