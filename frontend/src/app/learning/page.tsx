@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import Progress from "@/components/Progress";
 import PomodoroTimer from "@/components/PomodoroTimer";
 import EventCalendar from "@/components/calendar/EventCalendar";
+import Image from "next/image";
 
 export default function Home() {
   const [progress, setProgress] = useState(30);
@@ -48,6 +49,17 @@ export default function Home() {
             Calendar
           </h2>
           <EventCalendar />
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-semibold text-zinc-900 mb-4">Quiz</h2>
+          <Image
+            src="/images/quiz.png"
+            alt="token"
+            width={272}
+            height={314}
+            className=""
+          />
         </div>
       </aside>
     </>

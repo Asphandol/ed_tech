@@ -1,11 +1,17 @@
 "use client";
-import { useState } from "react";
-import { Home, GraduationCap, ShoppingCart, Calendar } from "lucide-react";
+import {
+  Home,
+  GraduationCap,
+  ShoppingCart,
+  Calendar,
+  Trophy,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import UserMenu from "./UserMenu";
 
 const navItems = [
-  { icon: <Home size={24} />, path: "/", tooltip: "Dashboard" },
+  { icon: <Home size={24} />, path: "/dashboard", tooltip: "Dashboard" },
   {
     icon: <GraduationCap size={24} />,
     path: "/learning",
@@ -21,6 +27,11 @@ const navItems = [
     icon: <Calendar size={24} />,
     path: "/calendar",
     tooltip: "Calendar",
+  },
+  {
+    icon: <Trophy size={24} />,
+    path: "/achievements",
+    tooltip: "Achievements",
   },
 ];
 
@@ -53,9 +64,7 @@ export default function Sidebar() {
       </div>
 
       <div className="mb-2">
-        <button className="w-10 h-10 rounded-full bg-purple-400 text-white text-lg hover:scale-105 transition">
-          😊
-        </button>
+        <UserMenu />
       </div>
     </aside>
   );
