@@ -1,10 +1,11 @@
 .calendar-container {
   margin: 0 auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: white;
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #dbeafe; /* light blue border */
 }
 
 .calendar-header {
@@ -17,17 +18,18 @@
 .calendar-header h2 {
   margin: 0;
   font-size: 1.2rem;
-  color: #333;
+  color: #1e3a8a; /* dark blue */
   font-weight: 600;
 }
 
 .streak-counter {
-  background: #fee2e2;
-  color: #dc2626;
+  background: #dbeafe; /* light blue */
+  color: #1d4ed8; /* medium blue */
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 500;
+  border: 1px solid #93c5fd; /* border blue */
 }
 
 .react-calendar {
@@ -42,36 +44,44 @@
 
 .react-calendar__navigation button {
   background: none;
-  border: none;
-  color: #333;
+  border: 1px solid #e0e7ff;
+  color: #1e3a8a;
   font-weight: 600;
   font-size: 1rem;
   min-width: 40px;
   padding: 6px 10px;
   border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.react-calendar__navigation button:hover {
+  background: #eff6ff;
 }
 
 .react-calendar__tile {
   border-radius: 8px;
   padding: 10px 6px;
   background: none;
-  border: none;
+  border: 1px solid #e0e7ff;
   font-weight: 500;
-  color: #333;
+  color: #1e3a8a;
+  transition: background 0.2s, color 0.2s;
+}
+
+.react-calendar__tile:hover {
+  background: #e0f2fe;
+  cursor: pointer;
 }
 
 .streak-date {
-  background: #dc2626 !important;
+  background: #1d4ed8 !important;
   color: white !important;
   font-weight: 600;
-}
-
-.today.streak-date {
-  position: relative;
+  border: 1px solid #1e40af !important;
 }
 
 .today.streak-date::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 5px;
   left: 50%;
