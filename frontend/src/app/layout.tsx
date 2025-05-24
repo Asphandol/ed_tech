@@ -1,4 +1,3 @@
-// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -28,12 +27,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="antialiased bg-gray-50 text-gray-900 min-h-screen">
+      <body className="antialiased bg-gray-50 text-gray-900">
         <AuthProvider>
           <MantineWrapper>
-            <div className="flex min-h-screen">
-              <Sidebar />
-              {children}
+            <div className="flex">
+              {/* Fixed sidebar */}
+              <div className="fixed left-0 top-0 h-screen w-20 z-50">
+                <Sidebar />
+              </div>
+
+              {/* Main content with left padding */}
+              <main className="ml-20 w-full min-h-screen overflow-x-hidden">
+                {children}
+              </main>
             </div>
           </MantineWrapper>
         </AuthProvider>

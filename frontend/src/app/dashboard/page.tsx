@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { LucideTrophy } from "lucide-react";
 import Image from "next/image";
-import Sidebar from "@/components/Sidebar";
 import OverviewCards from "@/components/OverviewCards";
 
 const Dashboard = () => {
@@ -28,7 +27,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <>
+    <div className="flex">
       <main className="flex-1 px-8 pt-10 space-y-10">
         <h1 className="text-2xl font-semibold text-zinc-800 mb-4">Dashboard</h1>
 
@@ -68,6 +67,7 @@ const Dashboard = () => {
           </div>
         </section>
       </main>
+
       <aside className="w-[500px] min-w-[300px] p-6 border-l border-gray-200 bg-white shadow-sm pt-10">
         <div className="bg-white p-4 rounded shadow">
           <p className="font-semibold mb-2">NEW TOKENS</p>
@@ -75,7 +75,7 @@ const Dashboard = () => {
             {newTokens.map((token, i) => (
               <li
                 key={i}
-                className="flex items-center gap-4 border-l-8 border-blue-600 "
+                className="flex items-center gap-4 border-l-8 border-blue-600"
               >
                 <Image
                   src={token.icon}
@@ -95,7 +95,7 @@ const Dashboard = () => {
           </p>
         </div>
       </aside>
-    </>
+    </div>
   );
 };
 
