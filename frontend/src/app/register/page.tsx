@@ -1,11 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { useAuth } from '@/contexts/authContext';
-import Image from 'next/image';
-
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useAuth } from "@/contexts/authContext";
+import Image from "next/image";
 
 interface Mentor {
   id: string;
@@ -15,48 +14,53 @@ interface Mentor {
 
 const mentors: Mentor[] = [
   {
-    id: 'hector',
-    name: 'Hector',
-    avatar: '/characters/hector.png'
+    id: "hector",
+    name: "Hector",
+    avatar: "/characters/hector.png",
   },
   {
-    id: 'selesta',
-    name: 'Selesta',
-    avatar: '/characters/salesta.png'
+    id: "selesta",
+    name: "Selesta",
+    avatar: "/characters/salesta.png",
   },
   {
-    id: 'lora',
-    name: 'Lora',
-    avatar: '/characters/lora.png'
-  }
+    id: "lora",
+    name: "Lora",
+    avatar: "/characters/lora.png",
+  },
 ];
 
 const topics = [
-  'IT', 'Languages', 'Art',
-  'Nature', 'Sport', 'Money',
-  'History', 'Math', 'Cosmos'
+  "IT",
+  "Languages",
+  "Art",
+  "Nature",
+  "Sport",
+  "Money",
+  "History",
+  "Math",
+  "Cosmos",
 ];
 
 const RegisterPage: React.FC = () => {
   const [step, setStep] = useState(1);
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('');
-  const [selectedMentor, setSelectedMentor] = useState<string>('');
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [selectedMentor, setSelectedMentor] = useState<string>("");
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const { register } = useAuth();
   const router = useRouter();
 
   const handleEmailPasswordNext = (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-
+    setError("");
 
     if (password.length < 6) {
-      setError('Password must be at least 6 characters long');
+      setError("Password must be at least 6 characters long");
       return;
     }
 
@@ -64,39 +68,37 @@ const RegisterPage: React.FC = () => {
   };
 
   const handleTopicToggle = (topic: string) => {
-    setSelectedTopics(prev => 
-      prev.includes(topic) 
-        ? prev.filter(t => t !== topic)
-        : [...prev, topic]
+    setSelectedTopics((prev) =>
+      prev.includes(topic) ? prev.filter((t) => t !== topic) : [...prev, topic]
     );
   };
 
   const handleFinish = async () => {
     if (!selectedMentor) {
-      setError('Please select a mentor');
+      setError("Please select a mentor");
       return;
     }
 
-    setError('');
+    setError("");
     setIsLoading(true);
 
     try {
       const registrationData = {
         email,
         password,
-        username, 
+        username,
         mentor: selectedMentor,
-        interests: selectedTopics
+        interests: selectedTopics,
       };
 
       const success = await register(email, password, registrationData);
       if (success) {
-        router.push('/dashboard');
+        router.push("/dashboard");
       } else {
-        setError('Registration failed. Please try again.');
+        setError("Registration failed. Please try again.");
       }
     } catch (err) {
-      setError('Registration failed. Please try again.');
+      setError("Registration failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -104,17 +106,8 @@ const RegisterPage: React.FC = () => {
 
   return (
     <>
-      
-      {/* Main Content */}
-      <div className="flex-1 bg-gray-50 flex items-center justify-center p-8">
+      <div className="flex-1 h-screen bg-gray-50 flex items-center justify-center p-8">
         <div className="max-w-2xl w-full">
-          {/* Header */}
-          <div className="text-right mb-8">
-            <Link href="/login" className="text-gray-600 hover:text-gray-800">
-              Sign Up
-            </Link>
-          </div>
-
           <div className="bg-white rounded-lg p-8 shadow-sm">
             <h1 className="text-3xl font-bold text-center text-gray-900 mb-12">
               Register
@@ -181,18 +174,25 @@ const RegisterPage: React.FC = () => {
                       <div
                         key={mentor.id}
                         className={`text-center cursor-pointer transition-transform hover:scale-105 ${
-                          selectedMentor === mentor.id ? 'transform scale-105' : ''
+                          selectedMentor === mentor.id
+                            ? "transform scale-105"
+                            : ""
                         }`}
                         onClick={() => setSelectedMentor(mentor.id)}
                       >
                         <div
                           className={`w-24 h-24 rounded-full flex items-center justify-center text-4xl mb-3 transition-all ${
                             selectedMentor === mentor.id
-                              ? 'bg-blue-100 ring-4 ring-blue-500'
-                              : 'bg-blue-50 hover:bg-blue-100'
+                              ? "bg-blue-100 ring-4 ring-blue-500"
+                              : "bg-blue-50 hover:bg-blue-100"
                           }`}
                         >
-                          <Image src={mentor.avatar} alt="Description of image" width={70} height={70}/>
+                          <Image
+                            src={mentor.avatar}
+                            alt="Description of image"
+                            width={70}
+                            height={70}
+                          />
                         </div>
                         <p className="text-lg font-medium text-gray-700">
                           {mentor.name}
@@ -219,7 +219,9 @@ const RegisterPage: React.FC = () => {
                           onChange={() => handleTopicToggle(topic)}
                           className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500"
                         />
-                        <span className="text-gray-700 font-medium">{topic}</span>
+                        <span className="text-gray-700 font-medium">
+                          {topic}
+                        </span>
                       </label>
                     ))}
                   </div>
@@ -238,7 +240,7 @@ const RegisterPage: React.FC = () => {
                     disabled={isLoading || !selectedMentor}
                     className="px-8 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? 'Creating account...' : 'Finish'}
+                    {isLoading ? "Creating account..." : "Finish"}
                   </button>
                 </div>
               </div>
@@ -247,8 +249,11 @@ const RegisterPage: React.FC = () => {
             {step === 1 && (
               <div className="text-center mt-6">
                 <span className="text-sm text-gray-600">
-                  Already have an account?{' '}
-                  <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500">
+                  Already have an account?{" "}
+                  <Link
+                    href="/login"
+                    className="font-medium text-blue-600 hover:text-blue-500"
+                  >
                     Sign in
                   </Link>
                 </span>
