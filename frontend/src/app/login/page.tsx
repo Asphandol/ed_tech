@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
     try {
       const success = await login(email, password);
       if (success) {
-        router.push("/dashboard");
+        router.push("/");
       } else {
         setError("Invalid email or password");
       }
@@ -34,63 +34,77 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 h-screen bg-gray-50 flex items-center justify-center p-8">
+    <div className="flex flex-col w-full h-screen bg-gray-50 items-center justify-center">
       <div className="max-w-2xl w-full">
-        <div className="bg-white rounded-lg p-8 shadow-sm">
+        <div className="text mb-8">
           <h1 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Sign in
+            Sign Up
           </h1>
-
+        </div>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="rounded-md shadow-sm -space-y-px">
             <div>
+              <label htmlFor="email" className="sr-only">
+                Email address
+              </label>
               <input
+                id="email"
+                name="email"
                 type="email"
-                placeholder="Email address"
+                autoComplete="email"
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-
             <div>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
               <input
+                id="password"
+                name="password"
                 type="password"
-                placeholder="Password"
+                autoComplete="current-password"
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+          </div>
 
+          <div>
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-slate-800 text-white py-3 rounded-lg hover:bg-slate-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Signing in..." : "Sign in"}
             </button>
-          </form>
+          </div>
 
-          <div className="text-center mt-6">
+          <div className="text-center">
             <span className="text-sm text-gray-600">
               Don't have an account?{" "}
               <Link
                 href="/register"
-                className="font-medium text-blue-600 hover:text-blue-500"
+                className="font-medium text-indigo-600 hover:text-indigo-500"
               >
                 Sign up
               </Link>
             </span>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );

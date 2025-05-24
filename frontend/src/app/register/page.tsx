@@ -106,8 +106,16 @@ const RegisterPage: React.FC = () => {
 
   return (
     <>
-      <div className="flex-1 h-screen bg-gray-50 flex items-center justify-center p-8">
+      {/* Main Content */}
+      <div className="h-screen flex-1 bg-gray-50 flex items-center justify-center p-8">
         <div className="max-w-2xl w-full">
+          {/* Header */}
+          <div className="text-right mb-8">
+            <Link href="/login" className="text-gray-600 hover:text-gray-800">
+              Sign Up
+            </Link>
+          </div>
+
           <div className="bg-white rounded-lg p-8 shadow-sm">
             <h1 className="text-3xl font-bold text-center text-gray-900 mb-12">
               Register

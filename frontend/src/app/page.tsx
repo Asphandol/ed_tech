@@ -1,24 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/contexts/authContext";
-
 const Home = () => {
-  const { user } = useAuth();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (user === null) {
-      // not logged in
-      router.push("/login");
-    } else if (user) {
-      // logged in
-      router.push("/dashboard");
-    }
-  }, [user]);
-
-  return null; // You can show a loading spinner if desired
+  return (
+    <main className="flex-1 px-8 pt-10 space-y-10">
+      <h1>HUI</h1>
+    </main>
+  );
 };
 
 export default Home;
