@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     secret_key: str = Field(alias="SECRET_KEY")
     algo: str = "HS256"
     access_exp: int = 60
+    openai_key: str = Field("OPENAI_KEY")
 
     class Config:
         env_file = ".env"

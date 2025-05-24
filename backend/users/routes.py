@@ -5,7 +5,7 @@ from users.models import Base, User
 from database import engine
 from users.schemas import UserCreate, UserOut, Token
 from users.auth import (
-     get_password_hash, authenticate_user,
+     decode_token, get_password_hash, authenticate_user,
     create_access_token, get_user_by_username
 )
 from datetime import timedelta

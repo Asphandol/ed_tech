@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from users.routes import app as users_router
+from open.routes import router as openai_router
 from config import config
 
 app = FastAPI()
@@ -21,6 +22,7 @@ app.add_middleware(
 )
 
 app.include_router(users_router)
+app.include_router(openai_router)
 
 
 

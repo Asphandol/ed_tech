@@ -30,4 +30,10 @@ def authenticate_user(db: Session, username: str, password: str):
         return user
     return None
 
+def decode_token(token: str):
+    try:
+        return jwt.decode(token, config.secret_key, algorithms=[config.algo])
+    except JWTError:
+        return None
+
 
