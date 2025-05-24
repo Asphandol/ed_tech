@@ -2,12 +2,31 @@
 
 import { useEffect, useState } from 'react'
 import { Play, Pause, RotateCcw } from 'lucide-react'
+import { post } from '../utils/api' 
 
 export default function PomodoroTimer() {
-  const POMODORO_TIME = 25 * 60 // 25 minutes in seconds
+  const POMODORO_TIME = 10 // 25 minutes in seconds
   const [secondsLeft, setSecondsLeft] = useState(POMODORO_TIME)
   const [isRunning, setIsRunning] = useState(false)
   const progress = ((POMODORO_TIME - secondsLeft) / POMODORO_TIME) * 100
+
+useEffect(() => {
+  if (secondsLeft === 0) {
+    async function sendPomodoroComplete() {
+      try {
+        const today = new Date();
+        console.log(today)
+        const dateString = today.toISOString().split('T')[0]; // "YYYY-MM-DD"
+        console.log(dateString)
+        await post('/pomodoro/', { date: dateString });
+      } catch (err) {
+        console.error('Failed to send pomodoro completion:', err);
+      }
+    }
+    sendPomodoroComplete();
+  }
+}, [secondsLeft]);
+
 
   const formatTime = (s: number) => {
     const minutes = Math.floor(s / 60)
@@ -31,7 +50,7 @@ export default function PomodoroTimer() {
       timer = setInterval(() => setSecondsLeft((s) => s - 1), 1000)
     } else if (secondsLeft === 0) {
       setIsRunning(false)
-      // Play completion sound here if desired
+
     }
 
     return () => {
