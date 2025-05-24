@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
+import SessionCalendar from '@/components/SessionCalendar';
 
 export default function Home() {
   const [progress, setProgress] = useState(30);
@@ -15,6 +16,8 @@ export default function Home() {
         </header>
 
     
+        <SessionCalendar/>
+
       </main>
     </div>
   );

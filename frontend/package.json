@@ -12,10 +12,12 @@
     "@fullcalendar/daygrid": "^6.1.17",
     "@fullcalendar/react": "^6.1.17",
     "@mantine/dates": "^8.0.1",
+    "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "lucide-react": "^0.511.0",
     "next": "15.1.8",
     "react": "^19.0.0",
+    "react-big-calendar": "^1.18.0",
     "react-calendar": "^5.1.0",
     "react-dom": "^19.0.0"
   },
